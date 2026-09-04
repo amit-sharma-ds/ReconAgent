@@ -1,0 +1,4 @@
+import { LedgerEntry, Settlement } from './types';
+const start = Math.floor(Date.now() / 1000) - 86400 * 12;
+export const demoSettlements: Settlement[] = Array.from({ length: 50 }, (_, i) => ({ id: `order_RECON${String(i + 1).padStart(3, '0')}`, amount: 5000 + ((i + 1) * 1379) % 45000, created_at: start + i * 18000, receipt: `recon-demo-${String(i + 1).padStart(3, '0')}`, status: 'created' }));
+export const demoLedger: LedgerEntry[] = demoSettlements.flatMap((s, i) => { if ([0,13,26,39].includes(i)) return []; const d = new Date(s.created_at * 1000); if ([8,27,44].includes(i)) d.setDate(d.getDate() + 1); const entry = { id: `led_${String(i + 1).padStart(3, '0')}`, amount: [6,19,33].includes(i) ? s.amount - Math.min(120, Math.round(s.amount * .018)) : s.amount, date: d.toISOString().slice(0, 10), receipt: s.receipt, note: 'Merchant ledger' }; return i === 23 ? [entry, { ...entry, id: `${entry.id}_duplicate`, note: 'Duplicate import' }] : [entry]; });

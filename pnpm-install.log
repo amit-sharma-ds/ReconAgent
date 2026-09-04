@@ -1,0 +1,43 @@
+Progress: resolved 1, reused 0, downloaded 0, added 0
+[WARN] deprecated recharts@2.15.4: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
+Progress: resolved 11, reused 0, downloaded 0, added 0
+Progress: resolved 13, reused 12, downloaded 0, added 0
+[WARN] deprecated next@15.1.6: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
+Progress: resolved 14, reused 13, downloaded 0, added 0
+Progress: resolved 16, reused 13, downloaded 0, added 0
+Progress: resolved 61, reused 19, downloaded 0, added 0
+Progress: resolved 64, reused 28, downloaded 0, added 0
+Progress: resolved 72, reused 31, downloaded 0, added 0
+Progress: resolved 119, reused 47, downloaded 0, added 0
+Progress: resolved 166, reused 53, downloaded 0, added 0
+Progress: resolved 196, reused 86, downloaded 0, added 0
+[WARN] Request took 17884ms: https://registry.npmjs.org/pnpm
+
+   ╭──────────────────────────────────────────╮
+   │                                          │
+   │   Update available! 11.19.0 → 11.25.0.   │
+   │   Changelog: https://pnpm.io/v/11.25.0   │
+   │     To update, run: pnpm add -g pnpm     │
+   │                                          │
+   ╰──────────────────────────────────────────╯
+
+Packages: +156
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 208, reused 113, downloaded 0, added 0
+Progress: resolved 208, reused 155, downloaded 0, added 0
+Progress: resolved 208, reused 155, downloaded 1, added 0
+Packages are hard linked from the content-addressable store to the virtual store.
+  Content-addressable store is at: D:\.pnpm-store\v11
+  Virtual store is at:             node_modules/.pnpm
+Progress: resolved 208, reused 155, downloaded 1, added 1
+[WARN] GET https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-15.1.6.tgz error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] GET https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-15.1.6.tgz error (23). Will retry in 1 minute. 1 retries left.
+[23] The operation was aborted due to timeout
+
+This error happened while installing the dependencies of next@15.1.6
+
+TimeoutError: The operation was aborted due to timeout
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at Timeout._onTimeout (node:internal/abort_controller:210:9)
+    at listOnTimeout (node:internal/timers:635:17)
+    at process.processTimers (node:internal/timers:571:7)
