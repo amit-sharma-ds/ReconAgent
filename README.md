@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ReconAgent
 
 > **Razorpay AI Buildathon 2026 · Track 04 — AI Finance Controller**
@@ -156,3 +157,6 @@ led_001,recon-demo-001,6379,2026-09-01,Merchant ledger entry
 - Keep API credentials only in server environment variables.
 - Treat reconciliation as a decision-support workflow, not an autonomous payment executor.
 - Require a human approval before any production bookkeeping change.
+=======
+# ReconAgent
+>>>>>>> 481f7662110b7197ce1946641f19b48c04a4b57d
