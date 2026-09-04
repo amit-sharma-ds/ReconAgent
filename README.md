@@ -71,6 +71,7 @@ The ledger side stays simulated until a CSV/ledger API is connected — a reconc
 ## 🛠️ Tech stack
 
 - **Frontend:** Next.js 15 · React 19 · TypeScript · Recharts (dashboard + radar chart)
+- **Database:** Relational
 - **Payments data:** Razorpay Orders API (Test Mode)
 - **AI Copilot / NLP:** Google AI Studio — Gemini API, for natural-language explanations of reconciliation decisions
 - **Reconciliation core:** rule-based, fully explainable matching engine (no black-box ML for the money-critical path)
