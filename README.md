@@ -99,6 +99,17 @@ flowchart LR
 
 PostgreSQL, pgvector, Redis and BullMQ are the scale-out path; the current hackathon deployment intentionally uses SQLite plus the deterministic retriever so it remains easy to run.
 
+### Cache and background jobs
+
+The current 50-record demo does not require a cache. For production traffic, Redis can be added for:
+
+- Short-lived caching of Razorpay API responses and repeated evidence queries
+- Distributed API rate limiting across multiple app instances
+- BullMQ jobs for Razorpay synchronization, large reconciliation batches and CSV processing
+- Queue health and retry tracking exposed to Prometheus and Grafana
+
+Redis is therefore an optional scale-out component, not a hidden dependency of the local demo.
+
 ## 🚀 Run locally
 
 ```bash
