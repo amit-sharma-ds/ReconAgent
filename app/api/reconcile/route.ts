@@ -3,6 +3,10 @@ import { reconcile } from '@/lib/reconcile';
 import { demoLedger, demoSettlements } from '@/lib/demo-data';
 import { getRazorpayTestOrders } from '@/lib/razorpay';
 import type { LedgerEntry, Settlement } from '@/lib/types';
+import { saveBatch, saveRun } from '@/lib/db';
+import { metrics } from '@/lib/metrics';
+
+export const dynamic = 'force-dynamic';
 
 function demoLedgerFor(settlements: Settlement[]): LedgerEntry[] {
   return settlements.flatMap((settlement, index) => {
@@ -20,14 +24,21 @@ function demoLedgerFor(settlements: Settlement[]): LedgerEntry[] {
 }
 
 export async function GET(request: Request) {
+  metrics.state.reconcileRequests += 1;
   const source = new URL(request.url).searchParams.get('source') === 'razorpay' ? 'razorpay' : 'demo';
   try {
     const settlements = source === 'razorpay' ? await getRazorpayTestOrders() : demoSettlements;
     if (!settlements.length) return NextResponse.json({ error: 'No Razorpay test orders found. Run the seed script first.', source }, { status: 404 });
-    const records = reconcile(settlements, source === 'razorpay' ? demoLedgerFor(settlements) : demoLedger);
-  const exact = records.filter(r => r.rule === 'exact').length;
-    return NextResponse.json({ records, source, summary: { total: records.length, matched: exact, exceptions: records.length - exact, matchRate: Math.round(exact / records.length * 100), generatedAt: new Date().toISOString() } });
+    const stored = await saveBatch(settlements, source === 'razorpay' ? demoLedgerFor(settlements) : demoLedger, source);
+    const records = reconcile(stored.settlements, stored.ledger);
+    const runId = await saveRun(source, records);
+    const persistedRecords = records.map((record, index) => ({ ...record, caseId: `${runId}_${index}_${record.settlement.id}` }));
+    const exact = records.filter(r => r.rule === 'exact').length;
+    metrics.state.exactMatches += exact;
+    metrics.state.exceptions += records.length - exact;
+    return NextResponse.json({ records: persistedRecords, source, runId, summary: { total: records.length, matched: exact, exceptions: records.length - exact, matchRate: Math.round(exact / records.length * 100), generatedAt: new Date().toISOString() } });
   } catch (error) {
+    metrics.state.errors += 1;
     return NextResponse.json({ error: error instanceof Error ? error.message : 'Unable to load Razorpay data.', source }, { status: 502 });
   }
 }

@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
     "generate:ledger": "tsx scripts/generate-ledger.ts",
     "razorpay:seed": "tsx scripts/seed-razorpay.ts"
   },
@@ -14,6 +16,8 @@
     "dotenv": "^16.4.7",
     "framer-motion": "^12.0.6",
     "next": "15.1.6",
+    "@prisma/client": "^6.7.0",
+    "prisma": "^6.7.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.1"

@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Settlement {
+  id         String   @id
+  amount     Int
+  created_at Int
+  receipt    String
+  status     String
+  source     String   @default("demo")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([receipt])
+}
+
+model LedgerEntry {
+  id        String   @id
+  amount    Int
+  date      String
+  receipt   String
+  note      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([receipt])
+}
+
+model ReconciliationRun {
+  id          String               @id
+  source      String
+  total       Int
+  matched     Int
+  exceptions  Int
+  matchRate   Int
+  createdAt   DateTime             @default(now())
+  cases       ReconciliationCase[]
+}
+
+model ReconciliationCase {
+  id           String            @id
+  runId        String
+  settlementId String
+  ledgerId     String?
+  status       String
+  rule         String
+  confidence   Int
+  reason       String
+  auditJson    String
+  reviewStatus String            @default("pending")
+  reviewNote   String?
+  reviewedAt   DateTime?
+  run          ReconciliationRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId])
+  @@index([reviewStatus])
+}

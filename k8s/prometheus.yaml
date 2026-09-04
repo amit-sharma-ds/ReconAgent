@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: reconagent
+spec:
+  selector:
+    matchLabels:
+      app: reconagent
+  endpoints:
+    - port: http
+      path: /api/metrics
