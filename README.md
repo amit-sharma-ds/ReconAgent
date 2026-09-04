@@ -11,6 +11,8 @@
 
 <br/>
 
+> **Razorpay AI Buildathon 2026 · Track 04 — AI Finance Controller**
+
 **Point it at a Razorpay settlement batch and a merchant ledger. Get the truth.**
 *A rule-based, explainable AI controller that auto-resolves only safe exact matches and routes everything else to a human — with a full audit trail.*
 
@@ -38,7 +40,7 @@ flowchart LR
 
 ## ✨ What it does
 
-- Reconciles a 50-record batch of Razorpay records against ledger entries
+- Reconciles a batch of Razorpay records against ledger entries
 - Auto-resolves only exact receipt + amount + date matches
 - Flags fee/amount mismatches, settlement-date offsets, and missing ledger entries
 - Assigns a confidence score + plain-language explanation to every record
@@ -61,7 +63,7 @@ flowchart LR
 
 | Mode | Data source | Use case |
 |---|---|---|
-| **Demo mode** | Labelled synthetic 50-record batch + synthetic ledger | Pitch/demo without exposing merchant data |
+| **Demo mode** | Labelled synthetic batch + synthetic ledger | Pitch/demo without exposing merchant data |
 | **Razorpay Test API mode** | Orders fetched server-side from your Razorpay Test credentials | Verify the real Razorpay integration |
 
 The ledger side stays simulated until a CSV/ledger API is connected — a reconciliation result is only meaningful once both sides are real.
@@ -94,7 +96,7 @@ GOOGLE_AI_STUDIO_API_KEY=your_gemini_api_key
 
 Never commit `.env.local`. Endpoints: `/api/reconcile?source=demo` and `/api/reconcile?source=razorpay` — both fetch server-side, so keys stay private.
 
-Optional: seed 50 Razorpay Test Mode orders with `npm run razorpay:seed` (Test Mode only; back off and retry on rate limits).
+Optional: seed labelled Razorpay Test Mode orders with `npm run razorpay:seed` (Test Mode only; back off and retry on rate limits).
 
 ## 📁 Project structure
 
