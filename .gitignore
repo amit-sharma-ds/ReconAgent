@@ -7,3 +7,4 @@ data/ledger.json
 .env*
 prisma/*.db
 prisma/**/*.db
+.vercel
