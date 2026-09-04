@@ -5,3 +5,5 @@ data/settlements.json
 data/ledger.json
 .env
 .env*
+prisma/*.db
+prisma/**/*.db
